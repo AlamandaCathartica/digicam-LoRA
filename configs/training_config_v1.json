@@ -1,0 +1,95 @@
+{
+  "model": {
+    "base_model": "z_image",
+    "model_name": "EMS-1391496-EMS.safetensors",
+    "vae": "diffusion_pytorch_model.safetensors",
+    "architecture": "Z-Image/lora",
+    "implementation": "https://github.com/Tongyi-MAI/Z-Image"
+  },
+
+  "training": {
+    "resolution": [1024, 1024],
+    "epochs": 5,
+    "max_train_steps": 1670,
+    "steps": 1670,
+    "batch_size": 1,
+    "gradient_accumulation_steps": 1,
+    "learning_rate": 0.0001,
+    "lr_scheduler": "constant",
+    "lr_warmup_steps": 0,
+    "optimizer": "bitsandbytes.optim.adamw.AdamW8bit",
+    "max_grad_norm": 1,
+    "mixed_precision": "bf16",
+    "seed": 933799393
+  },
+
+  "lora": {
+    "network_dim": 64,
+    "network_alpha": 32,
+    "network_dropout": null,
+    "network_module": "networks.lora_zimage",
+    "network_args": {
+      "factor": 8
+    }
+  },
+
+  "advanced": {
+    "gradient_checkpointing": true,
+    "gradient_checkpointing_cpu_offload": false,
+    "full_fp16": false,
+    "full_bf16": false,
+    "fp8_base": false,
+    "sigmoid_scale": 1,
+    "mode_scale": 1.29,
+    "logit_mean": 0,
+    "logit_std": 1,
+    "discrete_flow_shift": 3,
+    "timestep_sampling": "shift",
+    "guidance_scale": 1,
+    "weighting_scheme": "none"
+  },
+
+  "dataset": [
+    {
+      "image_directory": "image_dir",
+      "resolution": [1024, 1024],
+      "batch_size_per_device": 1,
+      "num_repeats": 9,
+      "caption_extension": ".txt",
+      "enable_bucket": true,
+      "bucket_no_upscale": false,
+      "has_control": false
+    },
+    {
+      "image_directory": "2",
+      "resolution": [1024, 1024],
+      "batch_size_per_device": 1,
+      "num_repeats": 2,
+      "caption_extension": ".txt",
+      "enable_bucket": true,
+      "bucket_no_upscale": false,
+      "has_control": false
+    },
+    {
+      "image_directory": "3",
+      "resolution": [1024, 1024],
+      "batch_size_per_device": 1,
+      "num_repeats": 3,
+      "caption_extension": ".txt",
+      "enable_bucket": true,
+      "bucket_no_upscale": false,
+      "has_control": false
+    }
+  ],
+
+  "metadata": {
+    "title": "lora",
+    "date": "2026-01-05T12:43:03",
+    "sai_model_spec": "1.0.0",
+    "output_name": "lora",
+    "training_comment": null,
+    "session_id": 1052545909,
+    "num_train_items": 334,
+    "num_batches_per_epoch": 334
+  }
+}
